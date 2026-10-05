@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="flex justify-center mt-10">
+            <div class="w-100 border border-3 h-fit shadow-xl bg-green-900 rounded-[10%] px-4 pt-8">
+                <div>
+                    <div class="w-5 rounded-full bg-gray-900 h-5">
+                        <div class="w-3 h-3 bg-gray-600 rounded-full">
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div id="on" class="bg-blue-100 p-5 mt-4 rounded-[20px]">
+
+                    <input v-model="inputNum" type="text"
+                        class="border border-3 bg-blue-700 w-full h-15 flex justify-end items-center rounded-md p-5 font-bold text-gray-50 text-2xl text-end"
+                        placeholder="0">
+                    <div class="mt-5 w-full h-100 grid grid-cols-4 gap-4">
+                        <button @click="clickNumber('7')"
+                            class="w-18 flex justify-center items-center shadow-xl font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-blue-200 bg-blue-400">7</button>
+                        <button @click="clickNumber('8')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-blue-200 bg-blue-400">8</button>
+                        <button @click="clickNumber('9')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-blue-200 bg-blue-400">9</button>
+                        <button @click="clickOperator('/')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-orange-200 bg-orange-400">/</button>
+                        <button @click="clickNumber('4')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-blue-200 bg-blue-400">4</button>
+                        <button @click="clickNumber('5')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-blue-200 bg-blue-400">5</button>
+                        <button @click="clickNumber('6')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-blue-200 bg-blue-400">6</button>
+                        <button @click="clickOperator('*')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-orange-200 bg-orange-400">x</button>
+                        <button @click="clickNumber('1')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-blue-200 bg-blue-400">1</button>
+                        <button @click="clickNumber('2')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-blue-200 bg-blue-400">2</button>
+                        <button @click="clickNumber('3')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-blue-200 bg-blue-400">3</button>
+                        <button @click="clickOperator('-')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-orange-200 bg-orange-400">-</button>
+                        <button @click="clickNumber('0')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-blue-200 bg-blue-400">0</button>
+                        <button @click="clickNumber('.')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-blue-200 bg-blue-400">.</button>
+                        <button @click="clickEqual()"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 text-gray-50 duration-200 hover:bg-red-400 rounded-full h-16 bg-red-600">=</button>
+                        <button @click="clickOperator('+')"
+                            class="w-18 flex justify-center items-center font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-orange-200 bg-orange-400">+</button>
+
+                        <button @click="clickC()"
+                            class="col-span-2 rounded-l-b-[10%] font-bold text-2xl shadow-2xl border-3 border-gray-900/50 text-gray-50 duration-200 hover:bg-red-400 rounded-full h-16 bg-red-600">C</button>
+                        <button @click="clickdel()"
+                            class="col-span-2 font-bold text-2xl shadow-2xl border-3 border-gray-900/50 rounded-full h-16 duration-200 hover:bg-orange-200 bg-orange-400">del</button>
+                    </div>
+                </div>
+                <div id="off" class="bg-blue-950 p-5 h-130 mt-4 hidden w-full rounded-[20px]">
+
+                </div>
+                <div class="w-full h-15 flex justify-center items-center">
+                    <button id="offButton" onclick="clickOff()"
+                        class="w-18 h-5 bg-blue-100 hidden border rounded-full"></button>
+                    <button id="onButton" onclick="clickOn()" class="w-18 h-5 bg-blue-100 border rounded-full"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    inputNum: '',
+                    currentinput: "",
+                    operator: "",
+                    firstNumber: 0,
+                    secondNumber: 0,
+                    success: '',
+                }
+            },
+            methods: {
+                clickNumber(value) {
+                    this.currentinput += value;
+                    this.inputNum = this.currentinput;
+                },
+                clickC() {
+                    this.currentinput = "";
+                    this.operator = "";
+                    this.secondNum = "";
+                    this.firstNumber = "";
+                    this.inputNum = "";
+                },
+                clickOperator(op) {
+                    if (this.operator === "" && this.currentinput !== "") {
+                        this.firstNumber = parseFloat(this.currentinput)
+                    } else {
+                        this.clickEqual();
+                        // if(!success) return;
+                    }
+                    this.operator = op;
+                    this.currentinput = "";
+                    this.inputNum = this.firstNumber;
+                },
+                clickEqual() {
+
+                    this.secondNumber = parseFloat(this.currentinput);
+
+
+                    if (this.operator === "/" && this.secondNumber === 0) {
+                        this.inputNum = "Error";
+
+                        return true;
+                    }
+
+                    if (this.secondNumber) {
+
+                        switch (this.operator) {
+                            case "+":
+                                this.firstNumber += this.secondNumber;
+                                break;
+                            case "-":
+                                this.firstNumber -= this.secondNumber;
+                                break;
+                            case "*":
+                                this.firstNumber *= this.secondNumber;
+                                break;
+                            case "/":
+
+                                this.firstNumber /= this.secondNumber;
+                                break;
+
+                            default:
+                                this.firstNumber = this.secondNumber;
+                        }
+                        this.currentinput = "";
+                        this.inputNum = this.firstNumber;
+                        return true;
+                    }
+                },
+                clickCalculate() {
+                    this.success = this.clickEqual();
+                    if (!this.success) {
+                        return;
+                    }
+                    this.operator = "";
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
